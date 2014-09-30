@@ -86,7 +86,7 @@ class Client extends \OpenTok\Util\Client
             $this->handleArchiveException($response);
         }
 
-        return $response->getBody();
+        return $response->getArrayBody();
     }
 
     public function stopArchive($archiveId)
