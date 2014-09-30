@@ -47,7 +47,7 @@ class OpenTok implements ServiceManagerAwareInterface
     {
         $obj_archive = $this->getOpenTok()->startArchive($sessionId);
 
-        return $obj_archive->toArray();
+        return $obj_archive->toJson();
     }
 
     public function stopArchive($archiveId)
