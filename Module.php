@@ -3,7 +3,7 @@
 namespace ZOpenTok;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use OpenTok\OpenTok as LibOpenTok;
+use OpenTok\OpenTok;
 use ZOpenTok\Client\Client;
 
 class Module implements ConfigProviderInterface
@@ -16,9 +16,9 @@ class Module implements ConfigProviderInterface
                             __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                         ),
                 ),
-                  'Zend\Loader\ClassMapAutoloader' => array(
+               /*   'Zend\Loader\ClassMapAutoloader' => array(
                        __DIR__ . '/autoload_classmap.php',
-                ),
+                ),*/
         );
     }
 
@@ -36,13 +36,13 @@ class Module implements ConfigProviderInterface
             'invokables' => array(
                 'ZOpenTok\Service\OpenTok'   => 'ZOpenTok\Service\OpenTok',
             ),
-        	'factories' => array(
-            	'opentok' => function($sm) {
-            		$zopentok = $sm->get('config')['zopentok-conf'];
-            		$client = new Client(array('adapter' => $sm->get('config')[$zopentok['adapter']]));
-            		
-            		return new LibOpenTok($zopentok['api_key'], $zopentok['api_secret'], array('client' => $client));
-            	}
+            'factories' => array(
+                'opentok' => function ($sm) {
+                    $zopentok = $sm->get('config')['zopentok-conf'];
+                    $client = new Client(array('adapter' => $sm->get('config')[$zopentok['adapter']]));
+
+                    return new OpenTok($zopentok['api_key'], $zopentok['api_secret'], array('client' => $client));
+                }
             ),
         );
     }
