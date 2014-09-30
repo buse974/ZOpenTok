@@ -1,13 +1,24 @@
 {
     "name": "buse974/zopentok",
     "description": "Zend Module for OpenTok",
-    "type": "Module ZF2",
+    "type": "library",
     "homepage": "https://github.com/buse974/ZOpenTok",
     "require" : {
+        "php": ">=5.4",
 	"opentok/opentok":"2.2.x",
 	"fabpot/php-cs-fixer":"*"
     },
+    "license": "MIT",
+    "authors": [
+        {
+        "name": "Christophe Robert",
+        "email": "christophe.robert@ti1.fr"
+        }
+    ],
     "config": {
         "bin-dir": "bin/"
+    },
+    "autoload": {
+        "psr-0": { "ZOpenTok": "src/" }
     } 
 }
