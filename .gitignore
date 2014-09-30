@@ -3,3 +3,6 @@ LICENSE.txt
 README.txt
 demos/
 extras/documentation
+bin/php-cs-fixer
+composer.lock
+vendor/
