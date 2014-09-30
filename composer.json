@@ -4,6 +4,7 @@
     "type": "Module ZF2",
     "homepage": "https://github.com/buse974/ZOpenTok",
     "require" : {
+	"opentok/opentok":"2.2.x",
 	"fabpot/php-cs-fixer":"*"
     },
     "config": {
