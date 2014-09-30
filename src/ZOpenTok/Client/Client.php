@@ -7,6 +7,12 @@ use Zend\Http\Request as ZRequest;
 use Zend\Http\Response;
 use ZOpenTok\Client\Response as OTReponse;
 
+use OpenTok\Exception\DomainException;
+use OpenTok\Exception\UnexpectedValueException;
+use OpenTok\Exception\ArchiveDomainException;
+use OpenTok\Exception\ArchiveUnexpectedValueException;
+use OpenTok\Exception\AuthenticationException;
+
 class Client extends \OpenTok\Util\Client
 {
     protected $apiKey;
@@ -192,12 +198,12 @@ class Client extends \OpenTok\Util\Client
         } catch (AuthenticationException $ae) {
             throw new ArchiveAuthenticationException($this->apiKey, $this->apiSecret, null, $ae->getPrevious());
         } catch (DomainException $de) {
-            throw new ArchiveDomainException($e->getMessage(), null, $de->getPrevious());
+            throw new ArchiveDomainException($de->getMessage(), null, $de->getPrevious());
         } catch (UnexpectedValueException $uve) {
-            throw new ArchiveUnexpectedValueException($e->getMessage(), null, $uve->getPrevious());
-        } catch (Exception $oe) {
+            throw new ArchiveUnexpectedValueException($uve->getMessage(), null, $uve->getPrevious());
+        } catch (\Exception $oe) {
             // TODO: check if this works because ArchiveException is an interface not a class
-            throw new ArchiveException($e->getMessage(), null, $oe->getPrevious());
+            throw new ArchiveException($oe->getMessage(), null, $oe->getPrevious());
         }
     }
 
