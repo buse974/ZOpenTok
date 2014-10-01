@@ -35,9 +35,9 @@ array(
 ))
 ```
 
-```php
-Add this configuration in ./config/autoload directory from your project.
-```
+
+	Add this configuration in ./config/autoload directory from your project.
+
 
 # Samples
 
