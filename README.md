@@ -5,7 +5,8 @@ Zend Module for OpenTok
 
 # Install
 
-** Params **
+###Params###
+
 ```php
 array(
         'zopentok-conf' => array(
