@@ -4,7 +4,7 @@
     "type": "library",
     "homepage": "https://github.com/buse974/ZOpenTok",
     "require" : {
-        "php": ">=5.4",
+        "php": ">=5.6",
 	"opentok/opentok":"2.2.x",
 	"fabpot/php-cs-fixer":"*"
     },

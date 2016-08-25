@@ -42,7 +42,7 @@ array(
 # Samples
 
 ```php
-$m_zopentok = $this->getServiceLocator()->get('opentok.service');
+$m_zopentok = $this->container->get('opentok.service');
 $session = $m_zopentok->createSession();
 $token = $m_zopentok->createToken();
 $session_id = $m_zopentok->getSessionId();

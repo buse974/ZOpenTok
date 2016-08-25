@@ -3,23 +3,20 @@
 namespace ZOpenTok;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use OpenTok\OpenTok;
 use ZOpenTok\Client\Client;
+use ZOpenTok\Service\OpenTok;
 
 class Module implements ConfigProviderInterface
 {
     public function getAutoloaderConfig()
     {
-        return array(
-                'Zend\Loader\StandardAutoloader' => array(
-                    'namespaces' => array(
-                            __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                        ),
-                ),
-               /*   'Zend\Loader\ClassMapAutoloader' => array(
-                       __DIR__ . '/autoload_classmap.php',
-                ),*/
-        );
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
+                        __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                    ],
+            ],
+        ];
     }
 
     public function getConfig()
@@ -29,21 +26,19 @@ class Module implements ConfigProviderInterface
 
     public function getServiceConfig()
     {
-        return array(
-            'aliases' => array(
-                 'opentok.service'    => 'ZOpenTok\Service\OpenTok',
-            ),
-            'invokables' => array(
-                'ZOpenTok\Service\OpenTok'   => 'ZOpenTok\Service\OpenTok',
-            ),
-            'factories' => array(
-                'opentok' => function ($sm) {
-                    $zopentok = $sm->get('config')['zopentok-conf'];
-                    $client = new Client(array('adapter' => $sm->get('config')[$zopentok['adapter']]));
-
-                    return new OpenTok($zopentok['api_key'], $zopentok['api_secret'], array('client' => $client));
+        return [
+            'aliases' => [
+                 'opentok.service' => ZOpenTok\Service\OpenTok::class,
+            ],
+            'factories' => [
+                ZOpenTok\Service\OpenTok::class => function ($sm) {
+                    $options = $sm->get('config')['zopentok-conf'];
+                    $client = new Client(['adapter' => $sm->get('config')[$options['adapter']]]);
+                    $opentok = new \OpenTok\OpenTok($options['api_key'], $options['api_secret'], ['client' => $client]);
+                     
+                    return new OpenTok($opentok, $options);
                 }
-            ),
-        );
+            ],
+        ];
     }
 }
