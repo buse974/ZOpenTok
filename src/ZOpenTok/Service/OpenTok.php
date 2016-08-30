@@ -35,9 +35,9 @@ class OpenTok
         return $this->opentok->generateToken($session_id, array('role' => $role,'expireTime' => time() + $this->options['expire_time'],'data' => $data));
     }
 
-    public function getSessionId()
+    public function getSessionId($media_mode = MediaMode::ROUTED)
     {
-        return $this->getSession()->getSessionId();
+        return $this->getSession($media_mode)->getSessionId();
     }
 
     public function getArchive($archiveId)
@@ -61,10 +61,10 @@ class OpenTok
         return $obj_archive->toArray();
     }
 
-    protected function getSession()
+    protected function getSession($media_mode = MediaMode::ROUTED)
     {
         if (null === $this->session) {
-            $this->session = $this->createSession();
+            $this->session = $this->createSession($media_mode);
         }
         
         return $this->session;
