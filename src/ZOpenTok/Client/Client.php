@@ -12,6 +12,8 @@ use OpenTok\Exception\UnexpectedValueException;
 use OpenTok\Exception\ArchiveDomainException;
 use OpenTok\Exception\ArchiveUnexpectedValueException;
 use OpenTok\Exception\AuthenticationException;
+use OpenTok\MediaMode;
+use OpenTok\Exception\ArchiveAuthenticationException;
 
 class Client extends \OpenTok\Util\Client
 {
@@ -187,7 +189,7 @@ class Client extends \OpenTok\Util\Client
                     null
             );
         } else {
-            throw new Exception('An unexpected error occurred:' . $resp->getReasonPhrase());
+            throw new \Exception('An unexpected error occurred:' . $resp->getReasonPhrase());
         }
     }
 
@@ -202,8 +204,7 @@ class Client extends \OpenTok\Util\Client
         } catch (UnexpectedValueException $uve) {
             throw new ArchiveUnexpectedValueException($uve->getMessage(), null, $uve->getPrevious());
         } catch (\Exception $oe) {
-            // TODO: check if this works because ArchiveException is an interface not a class
-            throw new ArchiveException($oe->getMessage(), null, $oe->getPrevious());
+            throw new \Exception($oe->getMessage(), null, $oe->getPrevious());
         }
     }
 

@@ -27,7 +27,7 @@ class Response extends BaseResponse
         libxml_disable_entity_loader($disableEntities);
 
         if ($errorMessage) {
-            throw new RuntimeException('Unable to parse response body into XML: ' . $errorMessage);
+            throw new \RuntimeException('Unable to parse response body into XML: ' . $errorMessage);
         }
 
         return $xml;
