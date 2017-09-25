@@ -87,7 +87,7 @@ class Client extends \OpenTok\Util\Client
         if (!$response->isSuccess()) {
             $this->handleArchiveException($response);
         }
-
+        
         return $response->getArrayBody();
     }
 
@@ -103,7 +103,7 @@ class Client extends \OpenTok\Util\Client
             $this->handleArchiveException($response);
         }
 
-        return $response->getBody();
+        return $response->getArrayBody();
     }
 
     public function getArchive($archiveId)
